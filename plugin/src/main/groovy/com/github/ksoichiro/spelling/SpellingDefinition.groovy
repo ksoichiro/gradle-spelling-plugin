@@ -4,7 +4,7 @@ class SpellingDefinition {
     List<SpellingRule> rules
 
     SpellingDefinition() {
-        rules = []
+        this.rules = []
     }
 
     void rules(Closure configureClosure) {
@@ -14,5 +14,9 @@ class SpellingDefinition {
 
     void define(Map configuration) {
         rules.add(new SpellingRule(configuration))
+    }
+
+    def methodMissing(String name, args) {
+        this."$name" = args[0]
     }
 }

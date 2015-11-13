@@ -10,6 +10,7 @@ class SpellingExtension {
 
     SpellingExtension(Project project) {
         this.project = project
+        this.definition = new SpellingDefinition()
     }
 
     def methodMissing(String name, def args) {

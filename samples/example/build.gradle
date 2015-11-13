@@ -1,6 +1,8 @@
 buildscript {
     repositories {
-        mavenLocal()
+        maven {
+            url uri('../repo')
+        }
     }
     dependencies {
         classpath 'com.github.ksoichiro:gradle-spelling-plugin:+'
@@ -16,4 +18,9 @@ repositories {
 }
 
 spelling {
+    definition {
+        rules {
+            define forbidden: 'Foo', recommended: 'Bar'
+        }
+    }
 }

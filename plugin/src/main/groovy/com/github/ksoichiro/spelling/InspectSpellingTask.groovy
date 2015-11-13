@@ -23,13 +23,13 @@ class InspectSpellingTask extends DefaultTask {
                 extension.definition.rules.each { SpellingRule r ->
                     if (line.contains(r.forbidden)) {
                         violations++
-                        println "${line}:${n}: Error: Found '${r.forbidden}, should replace to '${r.recommended}."
+                        println "${f.absolutePath}:${n}: Error: Found '${r.forbidden}', should replace to '${r.recommended}'."
                     }
                 }
             }
         }
         if (violations) {
-            throw new GradleException("Violations found: ${violations} violations")
+            throw new GradleException("Spelling inspection failed: ${violations} violations found")
         }
     }
 }
