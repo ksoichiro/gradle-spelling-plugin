@@ -8,11 +8,13 @@ class SpellingExtension {
     Project project
     SpellingDefinition definition
     String message
+    boolean failOnError
 
     SpellingExtension(Project project) {
         this.project = project
         this.definition = new SpellingDefinition()
         this.message = "Error: Found '%1s', should replace to '%2s'.";
+        this.failOnError = true
     }
 
     def methodMissing(String name, def args) {

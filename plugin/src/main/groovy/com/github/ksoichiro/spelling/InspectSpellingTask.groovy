@@ -28,7 +28,7 @@ class InspectSpellingTask extends DefaultTask {
                 }
             }
         }
-        if (violations) {
+        if (violations && extension.failOnError) {
             throw new GradleException("Spelling inspection failed: ${violations} violations found")
         }
     }
