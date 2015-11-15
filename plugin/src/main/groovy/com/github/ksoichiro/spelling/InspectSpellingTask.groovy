@@ -23,7 +23,7 @@ class InspectSpellingTask extends DefaultTask {
                 extension.definition.rules.each { SpellingRule r ->
                     if (line.contains(r.forbidden)) {
                         violations++
-                        println "${f.absolutePath}:${n}: Error: Found '${r.forbidden}', should replace to '${r.recommended}'."
+                        println "${f.absolutePath}:${n}: ${String.format(extension.message, r.forbidden, r.recommended)}"
                     }
                 }
             }

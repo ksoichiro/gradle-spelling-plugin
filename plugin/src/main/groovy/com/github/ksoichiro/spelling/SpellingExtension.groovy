@@ -7,10 +7,12 @@ import org.gradle.util.ConfigureUtil
 class SpellingExtension {
     Project project
     SpellingDefinition definition
+    String message
 
     SpellingExtension(Project project) {
         this.project = project
         this.definition = new SpellingDefinition()
+        this.message = "Error: Found '%1s', should replace to '%2s'.";
     }
 
     def methodMissing(String name, def args) {
