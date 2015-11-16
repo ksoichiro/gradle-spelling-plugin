@@ -16,9 +16,9 @@ class SpellingDefinition {
         rules.add(new SpellingRule(configuration))
     }
 
-    void configure(Node node) {
-        if (node.rules) {
-            node.rules.rule.each { Node rule ->
+    void configure(NodeList nodeList) {
+        if (nodeList.rules) {
+            nodeList.rules.rule.each { Node rule ->
                 def spellingRule = new SpellingRule()
                 spellingRule.configure(rule)
                 rules.add(spellingRule)
