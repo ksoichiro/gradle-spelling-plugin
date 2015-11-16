@@ -6,6 +6,15 @@ Gradle plugin to inspect spelling using custom blacklist.
 ./gradlew inspectSpelling
 ```
 
+## TODO
+
+* [ ] External configuration file (maybe XML format)
+* [ ] Inspection report
+* [ ] Include/exclude some files or directories
+* [ ] Configuration for each file extension (e.g. .java)
+* [ ] Configuration for specific files and directories
+* [ ] Exclude configuration from .gitignore
+
 ## License
 
     Copyright 2015 Soichiro Kashima
