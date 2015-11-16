@@ -39,8 +39,8 @@ class SpellingExtension {
                     failOnError = Boolean.valueOf(rootNode.failOnError.text() as String)
                 }
                 if (rootNode.excludes) {
-                    if (rootNode.excludes.@appendToDefault != null
-                        && !Boolean.valueOf(rootNode.excludes.@appendToDefault as String)) {
+                    if (rootNode.excludes[0].attribute('appendToDefault') != null
+                        && !Boolean.valueOf(rootNode.excludes[0].@appendToDefault as String)) {
                         excludes = []
                     }
                     rootNode.excludes.exclude.each { exclude ->
