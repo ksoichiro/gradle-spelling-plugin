@@ -1,5 +1,7 @@
 # gradle-spelling-plugin
 
+[![Build Status](https://travis-ci.org/ksoichiro/gradle-spelling-plugin.svg?branch=master)](https://travis-ci.org/ksoichiro/gradle-spelling-plugin)
+
 Gradle plugin to inspect spelling using custom blacklist.
 
 ```
