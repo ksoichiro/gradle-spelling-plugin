@@ -10,12 +10,16 @@ class SpellingExtension {
     SpellingDefinition definition
     String message
     boolean failOnError
+    List<String> excludes
+    List<String> includes
 
     SpellingExtension(Project project) {
         this.project = project
         this.definition = new SpellingDefinition()
         this.message = "Error: Found '%1s', should replace to '%2s'.";
         this.failOnError = true
+        this.excludes = ["**/build/**/*"]
+        this.includes = ["**/*"]
     }
 
     /**
@@ -33,6 +37,24 @@ class SpellingExtension {
                 }
                 if (rootNode.failOnError) {
                     failOnError = Boolean.valueOf(rootNode.failOnError.text() as String)
+                }
+                if (rootNode.excludes) {
+                    if (rootNode.excludes.@appendToDefault != null
+                        && !Boolean.valueOf(rootNode.excludes.@appendToDefault as String)) {
+                        excludes = []
+                    }
+                    rootNode.excludes.exclude.each { exclude ->
+                        excludes += exclude.text()
+                    }
+                }
+                if (rootNode.includes) {
+                    if (rootNode.includes.@appendToDefault != null
+                        && !Boolean.valueOf(rootNode.includes.@appendToDefault as String)) {
+                        includes = []
+                    }
+                    rootNode.includes.include.each { include ->
+                        includes += include.text()
+                    }
                 }
             } else {
                 println "Warning: configuration file not found: ${externalConfigFile.absolutePath}"

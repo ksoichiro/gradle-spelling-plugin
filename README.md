@@ -12,7 +12,7 @@ Gradle plugin to inspect spelling using custom blacklist.
 
 * [x] External configuration file (XML format)
 * [ ] Inspection report
-* [ ] Include/exclude some files or directories
+* [x] Include/exclude some files or directories
 * [ ] Configuration for each file extension (e.g. .java)
 * [ ] Configuration for specific files and directories
 * [ ] Exclude configuration from .gitignore

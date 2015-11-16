@@ -18,8 +18,8 @@ class InspectSpellingTask extends DefaultTask {
         extension.configure()
         int violations = 0
         project.fileTree(dir: project.projectDir,
-                excludes: ["**/build/**/*"],
-                includes: ["**/*"]).each { File f ->
+                excludes: extension.excludes,
+                includes: extension.includes).each { File f ->
             f.eachLine { String line, Integer n ->
                 extension.definition.rules.each { SpellingRule r ->
                     if (line.contains(r.forbidden)) {

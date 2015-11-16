@@ -19,6 +19,7 @@ repositories {
 
 spelling {
     failOnError false
+    excludes += 'build.gradle'
     definition {
         rules {
             define forbidden: 'Foo', recommended: 'Bar'

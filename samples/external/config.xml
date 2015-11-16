@@ -2,6 +2,9 @@
 <spelling>
     <message>Error: Found '%1s' but is should be '%2s'.</message>
     <failOnError>false</failOnError>
+    <excludes>
+        <exclude>config.xml</exclude>
+    </excludes>
     <definition>
         <rules>
             <rule forbidden="Foo" recommended="Bar" />
