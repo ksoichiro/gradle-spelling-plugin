@@ -15,6 +15,7 @@ class InspectSpellingTask extends DefaultTask {
 
     @TaskAction
     def exec() {
+        extension.configure()
         int violations = 0
         project.fileTree(dir: project.projectDir,
                 excludes: ["**/build/**/*"],

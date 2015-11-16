@@ -8,7 +8,7 @@ Gradle plugin to inspect spelling using custom blacklist.
 
 ## TODO
 
-* [ ] External configuration file (maybe XML format)
+* [x] External configuration file (XML format)
 * [ ] Inspection report
 * [ ] Include/exclude some files or directories
 * [ ] Configuration for each file extension (e.g. .java)

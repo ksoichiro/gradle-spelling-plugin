@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<spelling>
+    <definition>
+        <rules>
+            <rule forbidden="Foo" recommended="Bar" />
+        </rules>
+    </definition>
+</spelling>

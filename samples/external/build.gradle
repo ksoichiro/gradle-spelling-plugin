@@ -1,0 +1,22 @@
+buildscript {
+    repositories {
+        maven {
+            url uri('../repo')
+        }
+    }
+    dependencies {
+        classpath 'com.github.ksoichiro:gradle-spelling-plugin:+'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'com.github.ksoichiro.spelling'
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+spelling {
+    externalConfigFile file('config.xml')
+}
