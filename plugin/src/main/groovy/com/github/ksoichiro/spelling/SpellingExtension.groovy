@@ -28,6 +28,12 @@ class SpellingExtension {
                 if (rootNode.definition) {
                     definition.configure(rootNode.definition as NodeList)
                 }
+                if (rootNode.message) {
+                    message = rootNode.message.text()
+                }
+                if (rootNode.failOnError) {
+                    failOnError = Boolean.valueOf(rootNode.failOnError.text() as String)
+                }
             } else {
                 println "Warning: configuration file not found: ${externalConfigFile.absolutePath}"
             }
