@@ -51,6 +51,10 @@ dependencies {
     testCompile gradleTestKit()
 }
 
+cobertura {
+    coverageFormats = ['html', 'xml']
+}
+
 // To release:
 // ./gradlew clean assemble uploadArchives -Prelease
 def isReleaseBuild
