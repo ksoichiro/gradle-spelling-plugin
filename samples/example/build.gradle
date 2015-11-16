@@ -18,7 +18,7 @@ repositories {
 }
 
 spelling {
-    //failOnError false
+    failOnError false
     definition {
         rules {
             define forbidden: 'Foo', recommended: 'Bar'

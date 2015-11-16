@@ -1,0 +1,13 @@
+language: groovy
+
+jdk:
+  - openjdk7
+  - oraclejdk8
+
+script:
+  - ./gradlew clean build check uploadArchives
+  - cd samples/example && ./gradlew clean inspectSpelling && cd ../..
+  - cd samples/external && ./gradlew clean inspectSpelling && cd ../..
+
+#after_success:
+#  - ./gradlew cobertura coveralls
