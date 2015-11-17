@@ -108,4 +108,38 @@ class PluginTest {
         } catch (ignored) {
         }
     }
+
+    @Test
+    public void resetExcludesAndIncludes() {
+        Project project = ProjectBuilder.builder().withProjectDir(testProjectDir.root).build()
+        project.apply plugin: PLUGIN_ID
+
+        def configFile = testProjectDir.newFile('config.xml')
+        project.extensions.spelling.externalConfigFile = configFile
+        configFile.text = """\
+            |<?xml version="1.0" ?>
+            |<spelling>
+            |    <excludes appendToDefault="false">
+            |        <exclude>**/src/test/**/*</exclude>
+            |    </excludes>
+            |    <includes appendToDefault="false">
+            |        <include>**/src/**/*</include>
+            |    </includes>
+            |    <definition>
+            |        <rules>
+            |            <rule forbidden="Foo" recommended="Bar" />
+            |        </rules>
+            |    </definition>
+            |</spelling>""".stripMargin().stripIndent()
+        try {
+            project.evaluate()
+            project.tasks.inspectSpelling.execute()
+            fail()
+        } catch (ignored) {
+            assertEquals(1, project.extensions.spelling.includes.size())
+            assertEquals("**/src/**/*", project.extensions.spelling.includes[0])
+            assertEquals(1, project.extensions.spelling.excludes.size())
+            assertEquals("**/src/test/**/*", project.extensions.spelling.excludes[0])
+        }
+    }
 }
