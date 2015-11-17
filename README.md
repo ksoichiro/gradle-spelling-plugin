@@ -25,7 +25,7 @@ buildscript {
     }
 }
 
-apply plugin: 'com.github.ksoichiro.web.resource'
+apply plugin: 'com.github.ksoichiro.spelling'
 
 // If you use SNAPSHOT version
 buildscript {
