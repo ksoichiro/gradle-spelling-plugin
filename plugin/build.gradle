@@ -189,10 +189,10 @@ bintray {
         issueTrackerUrl = BINTRAY_ISSUE_TRACKER_URL
         vcsUrl = BINTRAY_VCS_URL
         licenses = ['Apache-2.0']
-        labels = ['gradle', 'plugin', 'CoffeeScript', 'LESS', 'Bower']
+        labels = ['gradle', 'plugin', 'spelling', 'code quality']
         publicDownloadNumbers = true
         version {
-            attributes = ['gradle-plugin': 'com.github.ksoichiro.web.resource:com.github.ksoichiro:gradle-web-resource-plugin']
+            attributes = ['gradle-plugin': 'com.github.ksoichiro.spelling:com.github.ksoichiro:gradle-spelling-plugin']
         }
     }
 }
@@ -207,7 +207,7 @@ pluginBundle {
         webResourcePlugin {
             id = GRADLE_PLUGIN_ID
             displayName = POM_NAME
-            tags = ['CoffeeScript', 'LESS', 'Bower']
+            tags = ['spelling', 'code quality']
         }
     }
 }
