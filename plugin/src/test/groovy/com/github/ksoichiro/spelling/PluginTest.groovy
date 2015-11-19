@@ -142,4 +142,16 @@ class PluginTest {
             assertEquals("**/src/test/**/*", project.extensions.spelling.excludes[0])
         }
     }
+
+    @Test
+    public void externalFileDoesNotExist() {
+        Project project = ProjectBuilder.builder().withProjectDir(testProjectDir.root).build()
+        project.apply plugin: PLUGIN_ID
+
+        project.extensions.spelling.externalConfigFile = new File(testProjectDir.root, "unknown")
+        project.evaluate()
+        project.tasks.inspectSpelling.execute()
+        assertEquals(1, project.extensions.spelling.includes.size())
+        assertEquals(1, project.extensions.spelling.excludes.size())
+    }
 }
