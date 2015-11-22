@@ -25,8 +25,4 @@ class SpellingDefinition {
             }
         }
     }
-
-    def methodMissing(String name, args) {
-        this."$name" = args[0]
-    }
 }
