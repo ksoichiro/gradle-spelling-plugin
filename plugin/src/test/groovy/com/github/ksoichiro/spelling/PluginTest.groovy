@@ -222,4 +222,141 @@ class PluginTest {
         project.extensions.spelling.unknownProperty {
         }
     }
+
+    @Test
+    public void configureExtensionNotThrowExceptionWithoutAnyChildrenTags() {
+        Project project = ProjectBuilder.builder().withProjectDir(testProjectDir.root).build()
+        project.apply plugin: PLUGIN_ID
+
+        def configFile = testProjectDir.newFile('config.xml')
+        project.extensions.spelling.externalConfigFile = configFile
+        configFile.text = """\
+            |<?xml version="1.0" ?>
+            |<spelling>
+            |</spelling>""".stripMargin().stripIndent()
+        project.evaluate()
+        project.tasks.inspectSpelling.execute()
+    }
+
+    @Test
+    public void configureExtensionNotThrowExceptionWithoutAnyRuleTags() {
+        Project project = ProjectBuilder.builder().withProjectDir(testProjectDir.root).build()
+        project.apply plugin: PLUGIN_ID
+
+        def configFile = testProjectDir.newFile('config.xml')
+        project.extensions.spelling.externalConfigFile = configFile
+        configFile.text = """\
+            |<?xml version="1.0" ?>
+            |<spelling>
+            |    <definition>
+            |    </definition>
+            |</spelling>""".stripMargin().stripIndent()
+        project.evaluate()
+        project.tasks.inspectSpelling.execute()
+    }
+
+    @Test
+    public void configureExtensionWithExcludesTagNotAppendToDefault() {
+        Project project = ProjectBuilder.builder().withProjectDir(testProjectDir.root).build()
+        project.apply plugin: PLUGIN_ID
+
+        def configFile = testProjectDir.newFile('config.xml')
+        project.extensions.spelling.externalConfigFile = configFile
+        configFile.text = """\
+            |<?xml version="1.0" ?>
+            |<spelling>
+            |    <excludes appendToDefault="false">
+            |        <exclude pattern=".gradle/**/*" />
+            |        <exclude pattern=".idea/**/*" />
+            |    </excludes>
+            |</spelling>""".stripMargin().stripIndent()
+        project.evaluate()
+        project.tasks.inspectSpelling.execute()
+        assertEquals(2, project.extensions.spelling.excludes.size())
+        assertFalse(project.extensions.spelling.excludes.any { it.equals("**/build/**/*") })
+    }
+
+    @Test
+    public void configureExtensionWithExcludesTagExplicitlyAppendToDefault() {
+        Project project = ProjectBuilder.builder().withProjectDir(testProjectDir.root).build()
+        project.apply plugin: PLUGIN_ID
+
+        def configFile = testProjectDir.newFile('config.xml')
+        project.extensions.spelling.externalConfigFile = configFile
+        configFile.text = """\
+            |<?xml version="1.0" ?>
+            |<spelling>
+            |    <excludes appendToDefault="true">
+            |        <exclude pattern=".gradle/**/*" />
+            |        <exclude pattern=".idea/**/*" />
+            |    </excludes>
+            |</spelling>""".stripMargin().stripIndent()
+        project.evaluate()
+        project.tasks.inspectSpelling.execute()
+        assertEquals(3, project.extensions.spelling.excludes.size())
+        assertTrue(project.extensions.spelling.excludes.any { it.equals("**/build/**/*") })
+    }
+
+    @Test
+    public void configureExtensionWithIncludesTagNotAppendToDefault() {
+        Project project = ProjectBuilder.builder().withProjectDir(testProjectDir.root).build()
+        project.apply plugin: PLUGIN_ID
+
+        def configFile = testProjectDir.newFile('config.xml')
+        project.extensions.spelling.externalConfigFile = configFile
+        configFile.text = """\
+            |<?xml version="1.0" ?>
+            |<spelling>
+            |    <includes appendToDefault="false">
+            |        <include pattern="**/*.java" />
+            |        <include pattern="**/*.groovy" />
+            |    </includes>
+            |</spelling>""".stripMargin().stripIndent()
+        project.evaluate()
+        project.tasks.inspectSpelling.execute()
+        assertEquals(2, project.extensions.spelling.includes.size())
+        assertFalse(project.extensions.spelling.includes.any { it.equals("**/*") })
+    }
+
+    @Test
+    public void configureExtensionWithIncludesTagExplicitlyAppendToDefault() {
+        Project project = ProjectBuilder.builder().withProjectDir(testProjectDir.root).build()
+        project.apply plugin: PLUGIN_ID
+
+        def configFile = testProjectDir.newFile('config.xml')
+        project.extensions.spelling.externalConfigFile = configFile
+        configFile.text = """\
+            |<?xml version="1.0" ?>
+            |<spelling>
+            |    <includes appendToDefault="true">
+            |        <include pattern="**/*.java" />
+            |        <include pattern="**/*.groovy" />
+            |    </includes>
+            |</spelling>""".stripMargin().stripIndent()
+        project.evaluate()
+        project.tasks.inspectSpelling.execute()
+        assertEquals(3, project.extensions.spelling.includes.size())
+        assertTrue(project.extensions.spelling.includes.any { it.equals("**/*") })
+    }
+
+    @Test
+    public void configureExtensionWithIncludesTagWithoutAppendToDefault() {
+        Project project = ProjectBuilder.builder().withProjectDir(testProjectDir.root).build()
+        project.apply plugin: PLUGIN_ID
+
+        def configFile = testProjectDir.newFile('config.xml')
+        project.extensions.spelling.externalConfigFile = configFile
+        configFile.text = """\
+            |<?xml version="1.0" ?>
+            |<spelling>
+            |    <includes>
+            |        <include pattern="**/*.java" />
+            |        <include pattern="**/*.groovy" />
+            |    </includes>
+            |</spelling>""".stripMargin().stripIndent()
+        project.evaluate()
+        project.tasks.inspectSpelling.execute()
+        assertEquals(3, project.extensions.spelling.includes.size())
+        assertTrue(project.extensions.spelling.includes.any { it.equals("**/*") })
+    }
 }

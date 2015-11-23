@@ -48,8 +48,8 @@ class SpellingExtension {
                     }
                 }
                 if (rootNode.includes) {
-                    if (rootNode.includes.@appendToDefault != null
-                        && !Boolean.valueOf(rootNode.includes.@appendToDefault as String)) {
+                    if (rootNode.includes[0].attribute('appendToDefault') != null
+                        && !Boolean.valueOf(rootNode.includes[0].@appendToDefault as String)) {
                         includes = []
                     }
                     rootNode.includes.include.each { include ->
