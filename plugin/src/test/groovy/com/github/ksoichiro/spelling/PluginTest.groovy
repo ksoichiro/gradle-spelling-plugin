@@ -1,5 +1,6 @@
 package com.github.ksoichiro.spelling
 
+import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Before
@@ -153,5 +154,24 @@ class PluginTest {
         project.tasks.inspectSpelling.execute()
         assertEquals(1, project.extensions.spelling.includes.size())
         assertEquals(1, project.extensions.spelling.excludes.size())
+    }
+
+    @Test
+    public void configureExtensionWithMissingMethodForDefinedProperty() {
+        Project project = ProjectBuilder.builder().withProjectDir(testProjectDir.root).build()
+        project.apply plugin: PLUGIN_ID
+
+        project.extensions.spelling.definition {
+            define forbidden: 'Foo', recommended: 'Bar'
+        }
+    }
+
+    @Test(expected = GradleException)
+    public void configureExtensionThrowsExceptionWithMissingMethodForUndefinedProperty() {
+        Project project = ProjectBuilder.builder().withProjectDir(testProjectDir.root).build()
+        project.apply plugin: PLUGIN_ID
+
+        project.extensions.spelling.unknownProperty {
+        }
     }
 }
