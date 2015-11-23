@@ -157,6 +157,54 @@ class PluginTest {
     }
 
     @Test
+    public void overrideFailOnErrorToTrueWithXmlConfig() {
+        Project project = ProjectBuilder.builder().withProjectDir(testProjectDir.root).build()
+        project.apply plugin: PLUGIN_ID
+
+        def configFile = testProjectDir.newFile('config.xml')
+        project.extensions.spelling.externalConfigFile = configFile
+        configFile.text = """\
+            |<?xml version="1.0" ?>
+            |<spelling>
+            |    <failOnError>true</failOnError>
+            |    <definition>
+            |        <rules>
+            |            <rule forbidden="Foo" recommended="Bar" />
+            |        </rules>
+            |    </definition>
+            |</spelling>""".stripMargin().stripIndent()
+        try {
+            project.evaluate()
+            project.tasks.inspectSpelling.execute()
+            fail()
+        } catch (ignored) {
+            assertTrue(project.extensions.spelling.failOnError)
+        }
+    }
+
+    @Test
+    public void overrideFailOnErrorToFalseWithXmlConfig() {
+        Project project = ProjectBuilder.builder().withProjectDir(testProjectDir.root).build()
+        project.apply plugin: PLUGIN_ID
+
+        def configFile = testProjectDir.newFile('config.xml')
+        project.extensions.spelling.externalConfigFile = configFile
+        configFile.text = """\
+            |<?xml version="1.0" ?>
+            |<spelling>
+            |    <failOnError>false</failOnError>
+            |    <definition>
+            |        <rules>
+            |            <rule forbidden="Foo" recommended="Bar" />
+            |        </rules>
+            |    </definition>
+            |</spelling>""".stripMargin().stripIndent()
+        project.evaluate()
+        project.tasks.inspectSpelling.execute()
+        assertFalse(project.extensions.spelling.failOnError)
+    }
+
+    @Test
     public void configureExtensionWithMissingMethodForDefinedProperty() {
         Project project = ProjectBuilder.builder().withProjectDir(testProjectDir.root).build()
         project.apply plugin: PLUGIN_ID
