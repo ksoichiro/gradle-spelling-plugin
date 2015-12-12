@@ -84,6 +84,10 @@ spelling {
     // some violations found, then set failOnError to false
     failOnError false
 
+    // If you want to fix violations, then set
+    // fixAutomatically to true
+    fixAutomatically false
+
     // If you want to customize error message,
     // set 'message' with String.format() format.
     // '%1s' will be the forbidden word,

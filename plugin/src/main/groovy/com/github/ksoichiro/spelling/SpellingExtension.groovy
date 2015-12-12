@@ -10,6 +10,7 @@ class SpellingExtension {
     SpellingDefinition definition
     String message
     boolean failOnError
+    boolean fixAutomatically
     List<String> excludes
     List<String> includes
 
@@ -18,6 +19,7 @@ class SpellingExtension {
         this.definition = new SpellingDefinition()
         this.message = "Error: Found '%1s', should replace to '%2s'.";
         this.failOnError = true
+        this.fixAutomatically = false
         this.excludes = ["**/build/**/*"]
         this.includes = ["**/*"]
     }
@@ -37,6 +39,9 @@ class SpellingExtension {
                 }
                 if (rootNode.failOnError) {
                     failOnError = Boolean.valueOf(rootNode.failOnError.text() as String)
+                }
+                if (rootNode.fixAutomatically) {
+                    fixAutomatically = Boolean.valueOf(rootNode.fixAutomatically.text() as String)
                 }
                 if (rootNode.excludes) {
                     if (rootNode.excludes[0].attribute('appendToDefault') != null
