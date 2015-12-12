@@ -205,6 +205,33 @@ class PluginTest {
     }
 
     @Test
+    public void overrideFixAutomaticallyToTrueWithXmlConfig() {
+        Project project = ProjectBuilder.builder().withProjectDir(testProjectDir.root).build()
+        project.apply plugin: PLUGIN_ID
+
+        def configFile = testProjectDir.newFile('config.xml')
+        project.extensions.spelling.externalConfigFile = configFile
+        configFile.text = """\
+            |<?xml version="1.0" ?>
+            |<spelling>
+            |    <fixAutomatically>true</fixAutomatically>
+            |    <definition>
+            |        <rules>
+            |            <rule forbidden="Foo" recommended="Bar" />
+            |        </rules>
+            |    </definition>
+            |</spelling>""".stripMargin().stripIndent()
+        project.evaluate()
+        project.tasks.inspectSpelling.execute()
+        assertEquals("""package com.example;
+            |
+            |public class A {
+            |    // Bar
+            |}
+            |""".stripMargin().stripIndent(), new File("${testProjectDir.root}/src/main/com/example/A.java").text)
+    }
+
+    @Test
     public void configureExtensionWithMissingMethodForDefinedProperty() {
         Project project = ProjectBuilder.builder().withProjectDir(testProjectDir.root).build()
         project.apply plugin: PLUGIN_ID
