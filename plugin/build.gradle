@@ -214,4 +214,8 @@ pluginBundle {
             tags = ['spelling', 'code quality']
         }
     }
+
+    mavenCoordinates {
+        artifactId = POM_ARTIFACT_ID
+    }
 }
