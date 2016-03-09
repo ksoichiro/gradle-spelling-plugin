@@ -1,0 +1,15 @@
+version: "{build}"
+
+build:
+  verbosity: detailed
+
+build_script:
+  - gradlew.bat --full-stacktrace clean assemble
+
+test_script:
+  - gradlew.bat --full-stacktrace check uploadArchives
+  - cd samples\example && gradlew.bat --full-stacktrace clean inspectSpelling && cd ..\..
+
+cache:
+  - .gradle
+  - C:\Users\appveyor\.gradle
