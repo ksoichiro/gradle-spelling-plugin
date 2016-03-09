@@ -1,8 +1,8 @@
 # gradle-spelling-plugin
 
-[![Build Status](https://travis-ci.org/ksoichiro/gradle-spelling-plugin.svg?branch=master)](https://travis-ci.org/ksoichiro/gradle-spelling-plugin)
-[![Build status](https://ci.appveyor.com/api/projects/status/ocqu536w80dm01lg/branch/master?svg=true)](https://ci.appveyor.com/project/ksoichiro/gradle-spelling-plugin/branch/master)
-[![Coverage Status](https://coveralls.io/repos/ksoichiro/gradle-spelling-plugin/badge.svg?branch=master&service=github)](https://coveralls.io/github/ksoichiro/gradle-spelling-plugin?branch=master)
+[![Build Status](https://img.shields.io/travis/ksoichiro/gradle-spelling-plugin/master.svg?style=flat-square)](https://travis-ci.org/ksoichiro/gradle-spelling-plugin)
+[![Build status](https://img.shields.io/appveyor/ci/ksoichiro/gradle-spelling-plugin/master.svg?style=flat-square)](https://ci.appveyor.com/project/ksoichiro/gradle-spelling-plugin)
+[![Coverage Stagus](https://img.shields.io/coveralls/ksoichiro/gradle-spelling-plugin/master.svg?style=flat-square)](https://coveralls.io/github/ksoichiro/gradle-spelling-plugin?branch=master)
 
 Gradle plugin to inspect spelling using custom blacklist.
 
