@@ -4,7 +4,7 @@
 [![Build status](https://img.shields.io/appveyor/ci/ksoichiro/gradle-spelling-plugin/master.svg?style=flat-square)](https://ci.appveyor.com/project/ksoichiro/gradle-spelling-plugin)
 [![Coverage Stagus](https://img.shields.io/coveralls/ksoichiro/gradle-spelling-plugin/master.svg?style=flat-square)](https://coveralls.io/github/ksoichiro/gradle-spelling-plugin?branch=master)
 
-Gradle plugin to inspect spelling using custom blacklist.
+> Gradle plugin to inspect spelling using custom blacklist.
 
 ## Usage
 
