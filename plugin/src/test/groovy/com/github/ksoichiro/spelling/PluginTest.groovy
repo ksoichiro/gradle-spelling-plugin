@@ -228,7 +228,7 @@ class PluginTest {
             |public class A {
             |    // Bar
             |}
-            |""".stripMargin().stripIndent(), new File("${testProjectDir.root}/src/main/com/example/A.java").text)
+            |""".stripMargin().stripIndent(), new File("${testProjectDir.root}/src/main/com/example/A.java").text.replaceAll("\r", ""))
     }
 
     @Test
