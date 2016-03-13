@@ -83,7 +83,7 @@ class FunctionalTest {
             .withPluginClasspath(pluginClasspath)
             .buildAndFail()
 
-        assertTrue(result.standardOutput.contains("Error: Found 'Foo', should replace to 'Bar'."))
+        assertTrue(result.output.contains("Error: Found 'Foo', should replace to 'Bar'."))
         assertEquals(result.task(":inspectSpelling").getOutcome(), TaskOutcome.FAILED)
     }
 }
